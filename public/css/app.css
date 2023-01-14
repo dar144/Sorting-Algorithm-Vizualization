@@ -1,0 +1,123 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #f8f8f4;
+}
+
+ul {
+    display: flex;
+    /* flex-direction: row; */
+    list-style-type: none;
+    background-color: #1B263B;
+}
+
+
+nav a {
+    text-decoration: none;
+    color: #E0E1DD;
+    padding: 10px 10px;
+}
+
+
+.left_item {
+    display: flex;
+    flex-direction: row; 
+    /* list-style-type: none; */
+    /* background-color: #415A77; */
+    transition: background-color 1s 1s;
+    /* justify-content: flex-start;  */
+}
+
+nav a {
+    transition: background-color 0.15s 0.15s;    
+}
+
+nav a:hover {
+    background-color: #415A77;     
+}
+
+
+.right_item {
+    display: flex;
+    flex-direction: row; 
+    /*list-style-type: none; */
+    /* align-self: center; */
+    /* background-color: #778DA9; */
+    /* justify-content: flex-end; */
+}
+
+.right_item li {
+    align-self: center;
+}
+
+/* .right_item {
+    justify-content: flex-end;
+} */
+
+div {
+    display: flex;
+    flex-direction: row; 
+}
+
+img {
+    width: 80%;
+}
+
+.image {
+    width: 60%;
+}
+
+.info {
+    text-align: center;
+}
+
+#alg_h1 {
+    text-align: center;
+}
+
+#alg_icon {
+    width: 60px;
+
+}
+
+.alg {
+    border: #1B263B solid 1px;
+    background-color: #d8e6f7b2;
+    margin: 20px 10px;
+    display: inline-block;
+    padding: 10px 30px 80px 30px;
+}
+
+.alg button {
+    background-color: inherit;
+    border: #1B263B solid 1px;
+    color: #1B263B;
+}
+
+.alg button:hover {
+    background-color: #c2d7f094;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#new_alg {
+    color: #1B263B;
+    border: 2px solid #1B263B;
+    padding: 0.5em 1em;
+    background: none;
+    font-size: 1em;
+    /* transition: color 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s; */
+}
+
+#new_alg:hover {
+    background: #415A77;
+    color: #E0E1DD;
+}
+
