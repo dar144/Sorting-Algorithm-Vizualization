@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/app.css" type="text/css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <section class="left_item">
+                <a href="./" id="test">
+                    <li>
+                        ABOUT US
+                    </li>
+                </a>
+                <a href="./algorithm" id="test">
+                    <li>
+                        ALGORITHM
+                    </li>
+                </a>
+                <% if(currentUser) { %>
+                    <a href="./profile" id="test">
+                        <li>
+                            PROFILE
+                        </li>
+                    </a>
+                    <% } %>
+            </section>
+            <section class="right_item">
+                <% if(!currentUser) { %>
+                    <a href="./login">
+                        <li>
+                            LOG IN
+                        </li>
+                    </a>
+                    <a href="./signup">
+                        <li>
+                            SIGN UP
+                        </li>
+                    </a>
+                    <% } %>
+                        <% if(currentUser) { %>
+                            <a href="./logout">
+                                <li>
+                                    LOG OUT
+                                </li>
+                            </a>
+                            <% } %>
+            </section>
+        </ul>
+    </nav>
+    <h1>Bubble sort</h1>
+
+    <% if(currentUser) { %>
+        <form action="">
+            <div>
+                <label for="numOfElements">Number of elements: </label>
+                <input type="number" id="numOfElements" class="numOfElements">
+            </div>
+            <div>
+                <label for="startOfRange">Start of the range</label>
+                <input type="number" id="startOfRange" class="startOfRange">
+            </div>
+            <div>
+                <label for="endOfRange">End of the range</label>
+                <input type="number" id="endOfRange" class="endOfRange">
+            </div>
+            <button>Submit</button>
+        </form>
+        <% } %>
+
+            <div id="array"></div>
+            <button type="button" onclick="clickBubbleSort()">See Bubble Sort</button>
+
+
+            <script src="/js/animation.js"></script>
+</body>
+
+</html>

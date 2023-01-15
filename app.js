@@ -6,8 +6,9 @@ const app = express();
 const User = require('./models/user');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const flash = require('connect-flash');
 
-mongoose.connect('mongodb://localhost:27017/users', {'useNewUrlParser': true})
+mongoose.connect('mongodb://localhost:27017/alg-com', {'useNewUrlParser': true})
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!");
     })
@@ -21,13 +22,28 @@ app.set('views', 'views');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: 'notagoodsecret' }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
+
+const sessionConfig = {
+    secret: 'thisshouldbeabettersecret!',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+app.use(session(sessionConfig))
+app.use(flash());
+
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.session.user_id;
     // console.log(res.locals.currentUser)
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
     next();
 })
 
@@ -42,8 +58,8 @@ app.get('/', (req, res) => {
     res.render('pages/home');
 })
 
-app.get('/algorithms', (req, res) => {
-    res.render('pages/algorithms');
+app.get('/algorithm', (req, res) => {
+    res.render('pages/algorithm');
 })
 
 app.get('/profile', requireLogin, (req, res) => {
@@ -82,6 +98,11 @@ app.post('/login', async (req, res) => {
     }
 })
 
+app.get('*', (req, res) => {
+    res.render('pages/error');
+})
+
+ 
 app.listen(3000, () => {
     console.log("Example app listening on port 3000");
 })
