@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('connect-flash');
 
-mongoose.connect('mongodb://localhost:27017/alg-com', {'useNewUrlParser': true})
+mongoose.connect('mongodb://localhost:27017/algcom', {'useNewUrlParser': true})
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!!");
     })
@@ -82,6 +82,7 @@ app.get('/logout', requireLogin, (req, res) => {
 app.post('/signup', async (req, res) => {
     const { password, username } = req.body;
     const user = new User({ username, password });
+    // TODO: vilidate
     await user.save();
     req.session.user_id = user._id;
     res.redirect('/');

@@ -33,3 +33,9 @@
 	width: 100%;
 	text-align: center;
 }
+
+canvas {
+	width: 500px;
+	height: 500px;
+	background-color: #f8f8f4;
+}
