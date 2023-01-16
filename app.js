@@ -4,6 +4,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const app = express();
 const User = require('./models/user');
+const Preferences = require('./models/preferences');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -41,7 +42,6 @@ app.use(flash());
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.session.user_id;
-    // console.log(res.locals.currentUser)
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
@@ -82,10 +82,14 @@ app.get('/logout', requireLogin, (req, res) => {
 app.post('/signup', async (req, res) => {
     const { password, username } = req.body;
     const user = new User({ username, password });
-    // TODO: vilidate
-    await user.save();
-    req.session.user_id = user._id;
-    res.redirect('/');
+    const foundUser = await User.findAndValidate(username, password);
+    if(!foundUser) {
+        await user.save();
+        req.session.user_id = user._id;
+        res.redirect('/');
+    } else {
+        res.redirect('/signup');
+    }
 })
 
 app.post('/login', async (req, res) => {
@@ -93,10 +97,19 @@ app.post('/login', async (req, res) => {
     const foundUser = await User.findAndValidate(username, password);
     if(foundUser) {
         req.session.user_id = foundUser._id;
+        console.log(req.session.user_id);
         res.redirect('/');
     } else {
         res.redirect('/login')
     }
+})
+
+app.post('/preferences', async (req, res) => {
+    const { numOfElements, startOfRange, endOfRange } = req.body;
+    const userID = req.session.user_id;
+    const preferences = new Preferences({ userID, numOfElements, startOfRange, endOfRange});
+    await preferences.save();
+    res.redirect('/algorithm');
 })
 
 app.get('*', (req, res) => {

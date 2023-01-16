@@ -57,25 +57,25 @@
     </nav>
     <h1>Bubble sort</h1>
     <% if(currentUser) { %>
-        <form action="">
+        <form action="/preferences" method="POST">
             <div>
                 <label for="numOfElements">Number of elements: </label>
-                <input type="number" id="numOfElements" class="numOfElements">
+                <input type="number" id="numOfElements" name="numOfElements">
             </div>
             <div>
                 <label for="startOfRange">Start of the range</label>
-                <input type="number" id="startOfRange" class="startOfRange">
+                <input type="number" id="startOfRange" name="startOfRange">
             </div>
             <div>
                 <label for="endOfRange">End of the range</label>
-                <input type="number" id="endOfRange" class="endOfRange">
+                <input type="number" id="endOfRange" name="endOfRange">
             </div>
             <button>Submit</button>
         </form>
-        <% } %>
-            <canvas id="bubble-sort"></canvas><br/>
-            <button onclick="clickBubbleSort()">See Bubble Sort</button>
-            <script src="/js/animation.js"></script>
+    <% } %>
+        <canvas id="bubble-sort"></canvas><br />
+        <button onclick="clickBubbleSort()">See Bubble Sort</button>
+        <script src="/js/animation.js"></script>
 </body>
 
 </html>
