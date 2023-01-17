@@ -1,0 +1,37 @@
+<nav id="mainNavbar" class="navbar navbar-expand-md navbar-dark">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="./" class="nav-link"> ABOUT US </a>
+            </li>
+            <li class="nav-item">
+                <a href="./algorithm" class="nav-link"> ALGORITHM </a>
+            </li>
+        </ul>
+    </div>
+    <div class="justify-content-end navbar-collapse collapse order-2 dual-collapse2">
+        <% if(!currentUser) { %>
+            <ul class="navbar-nav ml-auto text-end">
+                <li class="nav-item">
+                    <a href="./login" class="nav-link"> LOG IN </a>
+                </li>
+                <li class="nav-item">
+                    <a href="./signup" class="nav-link"> SIGN UP </a>
+                </li>
+            </ul>
+        <% } %>
+        <% if(currentUser) { %>
+            <ul class="navbar-nav ml-auto">
+                <!-- <li class="nav-item">
+                    <a href="./profile" class="nav-link"> PROFILE </a>
+                </li> -->
+                <li class="nav-item">
+                    <a href="./logout" class="nav-link"> LOG OUT </a>
+                </li>
+            </ul>
+        <% } %>
+    </section>
+</nav>

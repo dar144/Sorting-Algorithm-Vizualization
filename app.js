@@ -5,7 +5,6 @@ const methodOverride = require('method-override');
 const app = express();
 const User = require('./models/user');
 const Preferences = require('./models/preferences');
-const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('connect-flash');
 
@@ -42,10 +41,11 @@ app.use(flash());
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.session.user_id;
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
+    res.locals.message = req.session.message
+    delete req.session.message
     next();
 })
+
 
 const requireLogin = (req, res, next) => {
     if(!req.session.user_id) {
@@ -95,7 +95,7 @@ app.get('/logout', requireLogin, (req, res) => {
 app.post('/signup', async (req, res) => {
     const { password, username } = req.body;
     const user = new User({ username, password });
-    const foundUser = await User.findAndValidate(username, password);
+    const foundUser = await User.isExist(username, password);
 
     if(!foundUser) {
         await user.save();
@@ -105,9 +105,19 @@ app.post('/signup', async (req, res) => {
         const numOfElements = 20;
         const preferences = new Preferences({ sessionID, numOfElements });
         await preferences.save();
+
+        req.session.message = {
+            type: 'success',
+            intro: 'You have successfully registered',
+        }
         
         res.redirect('/');
     } else {
+        req.session.message = {
+            type: 'error',
+            intro: 'Username already exists',
+        }
+
         res.redirect('/signup');
     }
 })
@@ -117,9 +127,19 @@ app.post('/login', async (req, res) => {
     const foundUser = await User.findAndValidate(username, password);
     if(foundUser) {
         req.session.user_id = foundUser._id;
-        // console.log(req.session.user_id);
+
+        req.session.message = {
+            type: 'success',
+            intro: 'You have successfully logged in',
+        }
+
         res.redirect('/');
     } else {
+        req.session.message = {
+            type: 'error',
+            intro: 'Invalid username or password',
+        }
+
         res.redirect('/login')
     }
 })
