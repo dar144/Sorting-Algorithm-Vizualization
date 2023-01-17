@@ -1,16 +1,12 @@
 let intervalId;
 var canvas = document.getElementById("bubble-sort");
 var ctx = canvas.getContext("2d");
-// ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 // Set the number of bars in the animation
-var numBars = 20;
-
+var numBars;
 // Create an array of random heights for the bars
-var barHeights = new Array(numBars);
-// for (var i = 0; i < numBars; i++) {
-// 	barHeights[i] = Math.floor(Math.random() * canvas.height);
-// }
+var barHeights;
+
 
 // Draw the bars on the canvas with numbers above them
 function drawBars() {
@@ -40,8 +36,11 @@ function bubbleSortPass() {
 	drawBars();
 }
 
-// Start the animation
-function clickBubbleSort() {
+
+function clickBubbleSort(n) {
+	numBars = n;
+	barHeights = new Array(numBars);
+
 	intervalId && clearInterval(intervalId);
 	for (var i = 0; i < numBars; i++) {
 		barHeights[i] = Math.floor(Math.random() * canvas.height);

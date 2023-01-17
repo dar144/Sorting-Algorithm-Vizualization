@@ -58,8 +58,12 @@ app.get('/', (req, res) => {
     res.render('pages/home');
 })
 
-app.get('/algorithm', (req, res) => {
-    res.render('pages/algorithm');
+app.get('/algorithm', (req, res, next) => {
+    // var preferences = Preferences.find({ sessionID: req.session.user_id });
+    // console.log(preferences)
+    res.render('pages/algorithm', {
+        sessionId: req.session.user_id,
+    })
 })
 
 app.get('/profile', requireLogin, (req, res) => {
@@ -83,9 +87,16 @@ app.post('/signup', async (req, res) => {
     const { password, username } = req.body;
     const user = new User({ username, password });
     const foundUser = await User.findAndValidate(username, password);
+
     if(!foundUser) {
         await user.save();
         req.session.user_id = user._id;
+
+        const sessionID = req.session.user_id;
+        const numOfElements = 20;
+        const preferences = new Preferences({ sessionID, numOfElements });
+        await preferences.save();
+        
         res.redirect('/');
     } else {
         res.redirect('/signup');
@@ -104,13 +115,13 @@ app.post('/login', async (req, res) => {
     }
 })
 
-app.post('/preferences', async (req, res) => {
-    const { numOfElements, startOfRange, endOfRange } = req.body;
-    const userID = req.session.user_id;
-    const preferences = new Preferences({ userID, numOfElements, startOfRange, endOfRange});
-    await preferences.save();
-    res.redirect('/algorithm');
-})
+// app.post('/preferences', async (req, res) => {
+//     const { numOfElements, startOfRange, endOfRange } = req.body;
+//     const userID = req.session.user_id;
+//     const preferences = new Preferences({ userID, numOfElements });
+//     await preferences.save();
+//     res.redirect('/algorithm');
+// })
 
 app.get('*', (req, res) => {
     res.render('pages/error');

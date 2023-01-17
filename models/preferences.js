@@ -1,21 +1,13 @@
 const mongoose = require('mongoose');
 
 const preferencesSchema = new mongoose.Schema({
-    userID: {
+    sessionID: {
         type: String,
     },
     numOfElements: {
         type: Number,
         // required: [true, 'Username cannot be blank']
     },
-    startOfRange: {
-        type: Number,
-        // required: [true, 'Password cannot be blank']
-    },
-    endOfRange: {
-        type: Number,
-        // required: [true, 'Password cannot be blank']
-    }
 })
 
 // userSchema.statics.findAndValidate =  async function(username, password) {

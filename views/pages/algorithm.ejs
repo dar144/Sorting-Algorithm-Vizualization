@@ -56,26 +56,34 @@
         </ul>
     </nav>
     <h1>Bubble sort</h1>
+    <h2>Preferences</h2>
+    <p>Number of bars: 15</p>
     <% if(currentUser) { %>
-        <form action="/preferences" method="POST">
-            <div>
-                <label for="numOfElements">Number of elements: </label>
-                <input type="number" id="numOfElements" name="numOfElements">
-            </div>
-            <div>
-                <label for="startOfRange">Start of the range</label>
-                <input type="number" id="startOfRange" name="startOfRange">
-            </div>
-            <div>
-                <label for="endOfRange">End of the range</label>
-                <input type="number" id="endOfRange" name="endOfRange">
-            </div>
-            <button>Submit</button>
+        <form action="">
+            <button>Edit</button>
         </form>
     <% } %>
-        <canvas id="bubble-sort"></canvas><br />
-        <button onclick="clickBubbleSort()">See Bubble Sort</button>
-        <script src="/js/animation.js"></script>
+
+    <canvas id="bubble-sort"></canvas><br />
+    <button onclick="clickBubbleSort(15)">See Bubble Sort</button>
+    <script src="/js/animation.js"></script>
 </body>
 
 </html>
+
+
+<!-- <form action="/preferences" method="POST">
+    <div>
+        <label for="numOfElements">Number of elements: </label>
+        <input type="number" id="numOfElements" name="numOfElements">
+    </div>
+    <div>
+        <label for="startOfRange">Start of the range</label>
+        <input type="number" id="startOfRange" name="startOfRange">
+    </div>
+    <div>
+        <label for="endOfRange">End of the range</label>
+        <input type="number" id="endOfRange" name="endOfRange">
+    </div>
+    <button>Submit</button>
+</form> -->
