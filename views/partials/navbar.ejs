@@ -14,7 +14,7 @@
     </div>
     <div class="justify-content-end navbar-collapse collapse order-2 dual-collapse2">
         <% if(!currentUser) { %>
-            <ul class="navbar-nav ml-auto text-end">
+            <ul class="navbar-nav ml-auto text-md-end">
                 <li class="nav-item">
                     <a href="./login" class="nav-link"> LOG IN </a>
                 </li>
@@ -25,9 +25,6 @@
         <% } %>
         <% if(currentUser) { %>
             <ul class="navbar-nav ml-auto">
-                <!-- <li class="nav-item">
-                    <a href="./profile" class="nav-link"> PROFILE </a>
-                </li> -->
                 <li class="nav-item">
                     <a href="./logout" class="nav-link"> LOG OUT </a>
                 </li>

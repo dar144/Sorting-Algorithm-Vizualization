@@ -82,8 +82,12 @@ app.get('/login', (req, res) => {
     res.render('pages/login');
 })
 
-app.get('/edit', requireLogin, (req, res) => {
-    res.render('pages/edit');
+app.get('/edit', requireLogin, async (req, res) => {
+    const sessionID = req.session.user_id;
+    var preferences = await Preferences.findPreferences(sessionID);
+    res.render('pages/edit', {
+        numOfElements: preferences.numOfElements,
+    })
 })
 
 app.get('/logout', requireLogin, (req, res) => {

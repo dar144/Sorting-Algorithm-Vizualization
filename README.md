@@ -1,1 +1,1 @@
-npm bcrypt bootstrap bootstrap-icons connect-flash express express-session method-override mongoose path
+npm i bcrypt bootstrap bootstrap-icons connect-flash express express-session method-override mongoose path ejs

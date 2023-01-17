@@ -12,14 +12,12 @@
 </head>
 <body>
   <%- include('../partials/navbar')%>
-
-  <% if(message) {%>
-    <div style="text-align: center" class="alert alert-danger">
-        <strong><%= message.intro %></strong>
-    </div>
-  <% } %>
-
-  <div class="container">
+  <div class="container" id="container">
+    <% if(message) {%>
+      <div style="text-align: center" class="alert alert-danger">
+          <strong><%= message.intro %></strong>
+      </div>
+    <% } %>
   <h1>Sign up</h1>
   <form class="row g-3" action="/signup" method="POST">
       <div class="col-md-4">
@@ -34,7 +32,7 @@
         <input type="password" class="form-control" name="password" id="password" placeholder="password" required>
       </div>
       <div class="col-12">
-        <button id="signUpBtn" class="btn btn-primary" type="submit">Submit form</button>
+        <button id="btn" class="btn btn-primary" type="submit">Submit</button>
       </div>
     </form>
   </div>
