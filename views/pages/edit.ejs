@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algorithms</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <title>Edit</title>
     <link rel="stylesheet" href="/css/app.css" type="text/css">
 </head>
 
@@ -55,27 +54,14 @@
             </section>
         </ul>
     </nav>
-    <h1>Bubble sort</h1>
-    <h2>Preferences</h2>
-    <% if(!currentUser) { %>
-        <p>Number of bars: 20</p>
-    <% } %>
-    <% if(currentUser) { %>
-        <p>Number of bars: <%=numOfElements%></p>
-        <form action="/edit">
-            <button>Edit</button>
-        </form>
-    <% } %>
-    
-
-    <canvas id="bubble-sort"></canvas><br />
-    <% if(!currentUser) { %>
-        <button onclick="clickBubbleSort(20)">See Bubble Sort</button>
-    <% } %>
-    <% if(currentUser) { %>
-        <button onclick="clickBubbleSort('<%=numOfElements%>')">See Bubble Sort</button>
-    <% } %>
-    <script src="/js/animation.js"></script>
+    <h1>Edit Number of Bars</h1>
+    <form action="/edit?_method=PATCH" method="POST">
+        <div>
+            <label for="numOfElements">Number of elements: </label>
+            <input type="number" id="numOfElements" name="numOfElements">
+        </div>
+        <button>Submit</button>
+    </form>
 </body>
 
 </html>

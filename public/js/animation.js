@@ -38,6 +38,7 @@ function bubbleSortPass() {
 
 
 function clickBubbleSort(n) {
+	console.log(n)
 	numBars = n;
 	barHeights = new Array(numBars);
 
@@ -47,5 +48,5 @@ function clickBubbleSort(n) {
 	}
 	
 	drawBars();
-	intervalId = setInterval(bubbleSortPass, 100);
+	intervalId = setInterval(bubbleSortPass, 700);
 }

@@ -58,12 +58,16 @@ app.get('/', (req, res) => {
     res.render('pages/home');
 })
 
-app.get('/algorithm', (req, res, next) => {
-    // var preferences = Preferences.find({ sessionID: req.session.user_id });
-    // console.log(preferences)
-    res.render('pages/algorithm', {
-        sessionId: req.session.user_id,
-    })
+app.get('/algorithm', async (req, res, next) => {
+    const sessionID = req.session.user_id;
+    var preferences = await Preferences.findPreferences(sessionID);
+    if(preferences) {
+        res.render('pages/algorithm', {
+            numOfElements: preferences.numOfElements,
+        })
+    } else {
+        res.render('pages/algorithm');
+    }
 })
 
 app.get('/profile', requireLogin, (req, res) => {
@@ -78,10 +82,15 @@ app.get('/login', (req, res) => {
     res.render('pages/login');
 })
 
+app.get('/edit', requireLogin, (req, res) => {
+    res.render('pages/edit');
+})
+
 app.get('/logout', requireLogin, (req, res) => {
     req.session.user_id = null;
     res.redirect('/');
 })
+
 
 app.post('/signup', async (req, res) => {
     const { password, username } = req.body;
@@ -108,20 +117,25 @@ app.post('/login', async (req, res) => {
     const foundUser = await User.findAndValidate(username, password);
     if(foundUser) {
         req.session.user_id = foundUser._id;
-        console.log(req.session.user_id);
+        // console.log(req.session.user_id);
         res.redirect('/');
     } else {
         res.redirect('/login')
     }
 })
 
-// app.post('/preferences', async (req, res) => {
-//     const { numOfElements, startOfRange, endOfRange } = req.body;
-//     const userID = req.session.user_id;
-//     const preferences = new Preferences({ userID, numOfElements });
-//     await preferences.save();
-//     res.redirect('/algorithm');
-// })
+app.patch('/edit', async (req, res) => {
+    const newNum = req.body.numOfElements;
+    if(newNum) {
+        const sessionID = req.session.user_id;
+        var preferences = await Preferences.findPreferences(sessionID);
+        preferences.numOfElements = newNum;
+        await preferences.save();
+    }
+    res.redirect('/algorithm')
+  })
+
+
 
 app.get('*', (req, res) => {
     res.render('pages/error');

@@ -6,24 +6,14 @@ const preferencesSchema = new mongoose.Schema({
     },
     numOfElements: {
         type: Number,
-        // required: [true, 'Username cannot be blank']
     },
 })
 
-// userSchema.statics.findAndValidate =  async function(username, password) {
-//     const foundUser = await this.findOne({ username });
-//     if(foundUser) {
-//         const isValid = await bcrypt.compare(password, foundUser.password);
-//         return isValid? foundUser : false;
-//     }
-//     return false;
-// }
 
-// userSchema.pre('save', async function(next) {
-//     if(!this.isModified('password')) return next();
-//     this.password = await bcrypt.hash(this.password, 12);
-//     next();
-// })
+preferencesSchema.statics.findPreferences =  async function(sessionID) {
+    const foundPref = await this.findOne({ sessionID });
+    return foundPref;   
+}
 
 module.exports = mongoose.model('Preferences', preferencesSchema);
  
