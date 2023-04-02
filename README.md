@@ -17,6 +17,11 @@ The following snippet demonstrates how to run the project at the localhost envir
 ```sh
 $ alamakota
 ```
+## Gallery
+
+![screenshot2](screenshotlink)
+
+![screenshot3](screenshotlink)
 
 ## References
 
